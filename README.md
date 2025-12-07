@@ -4,8 +4,10 @@ Contributor: Yang Han (yah015@ucsd.edu), Shadee Hemaidan (shemaidan@ucsd.edu), T
 
 Diffusion MRI (dMRI) simulation code used for Project 2 in BENG 280A (FA25). The repository contains 1D Monte‑Carlo diffusion simulations under PGSE (Pulsed Gradient Spin Echo) sequences, with CPU, GPU and notebook implementations and optional restricted diffusion (reflecting boundaries) and parallelization over gradient amplitudes.
 
-[Link to our Github Repo](https://github.com/TonyYangHan/Grp6_BENG280A_Project_2)
-[Project Presentation](https://www.youtube.com/watch?v=7naFIeN-Tf4)
+[Link to our Github Repo](https://github.com/TonyYangHan/Grp6_BENG280A_Project_2) <br>
+
+[Project Presentation](https://www.youtube.com/watch?v=7naFIeN-Tf4) <br>
+
 ## Environment Setup
 
 The core dependencies used across the scripts/notebooks are:
