@@ -3,10 +3,10 @@ import matplotlib.pyplot as plt
 import time
 import sys
 
+# This code simulates 1D diffusion under a PGSE sequence using CPU computation.
+
+# Create PGSE gradient waveform
 def make_pgse_gradient(dt=1.0, n_delta=50, n_gap=100, G_amp=0.02, gamma=1.0):
-    """
-    Create PGSE gradient waveform (CPU version)
-    """
     n_big_delta = n_delta + n_gap
     n_total = n_big_delta + n_delta
 
@@ -20,15 +20,11 @@ def make_pgse_gradient(dt=1.0, n_delta=50, n_gap=100, G_amp=0.02, gamma=1.0):
     
     return t, G, dt, delta, big_delta, gamma
 
+# CPU core simulation function: Process a single batch of particles
 def simulate_batch_cpu(D, batch_size, G, dt, gamma, L=None):
-    """
-    CPU core simulation function: Process a single batch of particles
-    """
     n_total = len(G)
-    
-    # 1. Initialize CPU memory
-    # Using float32 for slightly faster calculation and memory saving on CPU, though less precise
-    # Remove dtype=np.float32 for higher precision (default is float64)
+
+    # 1. Initialize position and phase arrays
     x = np.zeros(batch_size, dtype=np.float32) 
     phi = np.zeros(batch_size, dtype=np.float32)
     
@@ -65,8 +61,6 @@ def simulate_batch_cpu(D, batch_size, G, dt, gamma, L=None):
     return batch_sum_signal
 
 def run_simulation_main():
-    # --- Parameter Settings ---
-    # Physical parameters
     D = 8e-9          # cm^2/ms
     G_amp = 2.0       # Gauss/cm
     n_delta = 300     # Pulse duration steps
@@ -75,10 +69,7 @@ def run_simulation_main():
     gamma = 26.75     # rad/(ms*Gauss)
     L = None          # cm (boundary size 40um)
     
-    # --- Simulation Scale Parameters ---
-    # Note: Running 10^10 on CPU is extremely slow.
-    # Recommended to test with 10^5 or 10^6 first to verify logic.
-    # Be prepared for very long runtime if using 10^10.
+
     total_spins = 10**7  # <--- Suggest testing with 10^6 first, then switch back to 10**10
     
     # Batch size: CPU RAM is usually larger, so can set higher, e.g., 10^6 ~ 10^7
@@ -139,11 +130,12 @@ def run_simulation_main():
     # Theoretical value (Stejskal-Tanner)
     b_value = (gamma**2) * (G_amp**2) * (delta**2) * (big_delta - delta/3.0)
     S_ST = np.exp(-b_value * D)
+    conv_fct = 1e-5
     
     print("Simulation Results (Real Values - CPU):")
     print(f"  D       = {D}")
     print(f"  G_amp   = {G_amp}")
-    print(f"  b-value = {b_value:.2e}")
+    print(f"  b-value = {b_value * conv_fct:.2e}")
     print("-" * 20)
     print(f"Simulated Signal |S| = {S_mag_sim:.6f}")
     print(f"Theoretical S_ST     = {S_ST:.6f} (Free Diffusion)")

@@ -3,6 +3,9 @@ import cupy as cp
 import matplotlib.pyplot as plt
 import time
 
+# This code simulates 1D diffusion under a PGSE sequence using GPU computation.
+
+# Create PGSE gradient waveform for GPU
 def make_pgse_gradient(dt=1.0, n_delta=50, n_gap=100, G_amp=0.02, gamma=1.0):
     # This part has small data size, keep on CPU (numpy), transfer to GPU later
     n_big_delta = n_delta + n_gap
@@ -21,10 +24,8 @@ def make_pgse_gradient(dt=1.0, n_delta=50, n_gap=100, G_amp=0.02, gamma=1.0):
     
     return t, G_gpu, dt, delta, big_delta, gamma
 
+# Simulate a batch of particles on GPU
 def simulate_batch_gpu(D, batch_size, G_gpu, dt, gamma, L=None):
-    """
-    Simulate a batch of particles on GPU
-    """
     n_total = len(G_gpu)
     
     # Initialize arrays on GPU
