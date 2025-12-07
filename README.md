@@ -1,6 +1,6 @@
 # Group6_BENG280A_Project_2
 
-Contributor: Yang Han (yah015@ucsd.edu), Shadee Hemaidan (), Tsunghan-Lu
+Contributor: Yang Han (yah015@ucsd.edu), Shadee Hemaidan (shemaidan@ucsd.edu), Tsung-Han Lu (tsl012@ucsd.edu)
 
 Diffusion MRI (dMRI) simulation code used for Project 2 in BENG 280A (FA25). The repository contains 1D Monte‑Carlo diffusion simulations under PGSE (Pulsed Gradient Spin Echo) sequences, with CPU, GPU and notebook implementations and optional restricted diffusion (reflecting boundaries) and parallelization over gradient amplitudes.
 
@@ -77,6 +77,11 @@ pip install cupy-cuda12x  # example for CUDA 12.x
     - Initial scale up of Monte-Carlo diffusion to 2D. The simulation space has anisotropy that particles diffuses faster along x-axis but slower along y-axis
     - Same gradient design is applied, despite at different angles (tunable parameter) to explore how apparent diffusivity and signal changes.
     - Offers the option to simulate restricted diffusion in a boxed x and y space. Compares signal to ST equation calculation.
+
+- `2D_dMRI_v2.py`
+	- Runs a 2D anisotropic diffusion simulation where diffusion along x is faster than along y, under a rotating PGSE gradient. The core diffusion idea is the same as previously.
+	- Computes the apparent/effective diffusivity as a function of gradient angle and compares Monte‑Carlo estimates with the Stejskal–Tanner prediction.
+	- Produces a two‑panel figure: a schematic of the anisotropic diffusion tensor and gradient direction, and a plot of effective diffusivity vs. gradient angle.
 	
 
 ## How to Run
